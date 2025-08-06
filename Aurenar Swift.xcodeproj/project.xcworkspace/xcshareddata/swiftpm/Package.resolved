@@ -1,0 +1,15 @@
+{
+  "originHash" : "fe4978e4322617f775086595130fba9a0941370a8189b4e06972d3acdef08003",
+  "pins" : [
+    {
+      "identity" : "glassgem",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/armadsen/GlassGem.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e0bcb92ebbcf830a4ea843e87abb66d7b6b2485a"
+      }
+    }
+  ],
+  "version" : 3
+}

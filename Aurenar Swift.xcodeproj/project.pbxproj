@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		20FC0BB32E3174DB00DD370B /* GlassGem in Frameworks */ = {isa = PBXBuildFile; productRef = 20FC0BB22E3174DB00DD370B /* GlassGem */; };
+		20FD678B2E12DE8A003C26BA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FD678A2E12DE8A003C26BA /* WidgetKit.framework */; };
+		20FD678D2E12DE8A003C26BA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FD678C2E12DE8A003C26BA /* SwiftUI.framework */; };
+		20FD67982E12DE8B003C26BA /* dynIslandExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 20FD67882E12DE8A003C26BA /* dynIslandExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		200997E52DF8D49F0045F329 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,17 +28,61 @@
 			remoteGlobalIDString = 200997D32DF8D49E0045F329;
 			remoteInfo = "Aurenar Swift";
 		};
+		20FD67962E12DE8B003C26BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 200997CC2DF8D49E0045F329 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20FD67872E12DE8A003C26BA;
+			remoteInfo = dynIslandExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		20FD679D2E12DE8B003C26BA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				20FD67982E12DE8B003C26BA /* dynIslandExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		200997D42DF8D49E0045F329 /* Aurenar Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aurenar Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200997E42DF8D49F0045F329 /* Aurenar SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Aurenar SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200997EE2DF8D49F0045F329 /* Aurenar SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Aurenar SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20FD67882E12DE8A003C26BA /* dynIslandExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = dynIslandExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		20FD678A2E12DE8A003C26BA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		20FD678C2E12DE8A003C26BA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		20FD67992E12DE8B003C26BA /* Exceptions for "dynIsland" folder in "dynIslandExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 20FD67872E12DE8A003C26BA /* dynIslandExtension */;
+		};
+		20FD67A12E12E8B9003C26BA /* Exceptions for "Aurenar Swift" folder in "dynIslandExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/Core/TimeTrackingAttributes.swift",
+			);
+			target = 20FD67872E12DE8A003C26BA /* dynIslandExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		200997D62DF8D49E0045F329 /* Aurenar Swift */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				20FD67A12E12E8B9003C26BA /* Exceptions for "Aurenar Swift" folder in "dynIslandExtension" target */,
+			);
 			path = "Aurenar Swift";
 			sourceTree = "<group>";
 		};
@@ -45,6 +96,14 @@
 			path = "Aurenar SwiftUITests";
 			sourceTree = "<group>";
 		};
+		20FD678E2E12DE8A003C26BA /* dynIsland */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				20FD67992E12DE8B003C26BA /* Exceptions for "dynIsland" folder in "dynIslandExtension" target */,
+			);
+			path = dynIsland;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20FC0BB32E3174DB00DD370B /* GlassGem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +129,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20FD67852E12DE8A003C26BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20FD678D2E12DE8A003C26BA /* SwiftUI.framework in Frameworks */,
+				20FD678B2E12DE8A003C26BA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +147,8 @@
 				200997D62DF8D49E0045F329 /* Aurenar Swift */,
 				200997E72DF8D49F0045F329 /* Aurenar SwiftTests */,
 				200997F12DF8D49F0045F329 /* Aurenar SwiftUITests */,
+				20FD678E2E12DE8A003C26BA /* dynIsland */,
+				20FD67892E12DE8A003C26BA /* Frameworks */,
 				200997D52DF8D49E0045F329 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +159,18 @@
 				200997D42DF8D49E0045F329 /* Aurenar Swift.app */,
 				200997E42DF8D49F0045F329 /* Aurenar SwiftTests.xctest */,
 				200997EE2DF8D49F0045F329 /* Aurenar SwiftUITests.xctest */,
+				20FD67882E12DE8A003C26BA /* dynIslandExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		20FD67892E12DE8A003C26BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20FD678A2E12DE8A003C26BA /* WidgetKit.framework */,
+				20FD678C2E12DE8A003C26BA /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,16 +183,19 @@
 				200997D02DF8D49E0045F329 /* Sources */,
 				200997D12DF8D49E0045F329 /* Frameworks */,
 				200997D22DF8D49E0045F329 /* Resources */,
+				20FD679D2E12DE8B003C26BA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				20FD67972E12DE8B003C26BA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				200997D62DF8D49E0045F329 /* Aurenar Swift */,
 			);
 			name = "Aurenar Swift";
 			packageProductDependencies = (
+				20FC0BB22E3174DB00DD370B /* GlassGem */,
 			);
 			productName = "Aurenar Swift";
 			productReference = 200997D42DF8D49E0045F329 /* Aurenar Swift.app */;
@@ -163,6 +247,28 @@
 			productReference = 200997EE2DF8D49F0045F329 /* Aurenar SwiftUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		20FD67872E12DE8A003C26BA /* dynIslandExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20FD679A2E12DE8B003C26BA /* Build configuration list for PBXNativeTarget "dynIslandExtension" */;
+			buildPhases = (
+				20FD67842E12DE8A003C26BA /* Sources */,
+				20FD67852E12DE8A003C26BA /* Frameworks */,
+				20FD67862E12DE8A003C26BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				20FD678E2E12DE8A003C26BA /* dynIsland */,
+			);
+			name = dynIslandExtension;
+			packageProductDependencies = (
+			);
+			productName = dynIslandExtension;
+			productReference = 20FD67882E12DE8A003C26BA /* dynIslandExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -170,7 +276,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					200997D32DF8D49E0045F329 = {
@@ -184,6 +290,9 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = 200997D32DF8D49E0045F329;
 					};
+					20FD67872E12DE8A003C26BA = {
+						CreatedOnToolsVersion = 16.4;
+					};
 				};
 			};
 			buildConfigurationList = 200997CF2DF8D49E0045F329 /* Build configuration list for PBXProject "Aurenar Swift" */;
@@ -195,6 +304,9 @@
 			);
 			mainGroup = 200997CB2DF8D49E0045F329;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				20FC0B6E2E3172EE00DD370B /* XCRemoteSwiftPackageReference "GlassGem" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 200997D52DF8D49E0045F329 /* Products */;
 			projectDirPath = "";
@@ -203,6 +315,7 @@
 				200997D32DF8D49E0045F329 /* Aurenar Swift */,
 				200997E32DF8D49F0045F329 /* Aurenar SwiftTests */,
 				200997ED2DF8D49F0045F329 /* Aurenar SwiftUITests */,
+				20FD67872E12DE8A003C26BA /* dynIslandExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +336,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		200997EC2DF8D49F0045F329 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20FD67862E12DE8A003C26BA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +373,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20FD67842E12DE8A003C26BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +392,11 @@
 			isa = PBXTargetDependency;
 			target = 200997D32DF8D49E0045F329 /* Aurenar Swift */;
 			targetProxy = 200997EF2DF8D49F0045F329 /* PBXContainerItemProxy */;
+		};
+		20FD67972E12DE8B003C26BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20FD67872E12DE8A003C26BA /* dynIslandExtension */;
+			targetProxy = 20FD67962E12DE8B003C26BA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -321,6 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -378,6 +511,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -396,13 +530,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aurenar Swift/Preview Content\"";
+				DEVELOPMENT_TEAM = HJQ3N56T7G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Aurenar-Swift-Info.plist";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "give access to scan";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "give access to UART";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -424,13 +563,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Aurenar Swift/Preview Content\"";
+				DEVELOPMENT_TEAM = HJQ3N56T7G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Aurenar-Swift-Info.plist";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "give access to scan";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "give access to UART";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -512,6 +656,62 @@
 			};
 			name = Release;
 		};
+		20FD679B2E12DE8B003C26BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HJQ3N56T7G;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dynIsland/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = dynIsland;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Aurenar.Aurenar-Swift.dynIsland";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		20FD679C2E12DE8B003C26BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HJQ3N56T7G;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dynIsland/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = dynIsland;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Aurenar.Aurenar-Swift.dynIsland";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -551,7 +751,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		20FD679A2E12DE8B003C26BA /* Build configuration list for PBXNativeTarget "dynIslandExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20FD679B2E12DE8B003C26BA /* Debug */,
+				20FD679C2E12DE8B003C26BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		20FC0B6E2E3172EE00DD370B /* XCRemoteSwiftPackageReference "GlassGem" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/armadsen/GlassGem.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		20FC0BB22E3174DB00DD370B /* GlassGem */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20FC0B6E2E3172EE00DD370B /* XCRemoteSwiftPackageReference "GlassGem" */;
+			productName = GlassGem;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 200997CC2DF8D49E0045F329 /* Project object */;
 }
