@@ -1,14 +1,15 @@
 //
-//  levelCheckView.swift
+//  impLevelCheckView.swift
 //  Aurenar Swift
 //
-//  Created by Ivan Martinez-Kay on 7/21/25.
+//  Created by Ivan Martinez-Kay on 8/7/25.
 //
+
 
 import Foundation
 import SwiftUI
 
-struct levelCheckView: View {
+struct impLevelCheckView: View {
     var lvl: CGFloat
     var imageName: String
     @State private var color: Color = Color(red: 3.0/255.0, green: 160.0/255.0, blue: 211.0/255.0)
@@ -33,7 +34,7 @@ struct levelCheckView: View {
                     path.move(to: start)
                     path.addLine(to: end)
                 }
-                .stroke(Color(lvl <= 15 ? .red: color).opacity(lvl == 0 ? 0.0 : 0.7), style: StrokeStyle(lineWidth: 14, lineCap: .round))
+                .stroke(Color(lvl <= 5 || lvl >= 95 ? .red : lvl <= 15 || lvl >= 85 ? .yellow: color).opacity(lvl == 0 ? 0.0 : 0.7), style: StrokeStyle(lineWidth: 14, lineCap: .round))
                 .animation(.easeInOut(duration: 1.0), value: lvl)
                 
                 Image(systemName: imageName)
@@ -44,8 +45,8 @@ struct levelCheckView: View {
     }
 }
 
-struct LevelCheckView_Previews: PreviewProvider {
+struct impLevelCheckView_Previews: PreviewProvider {
     static var previews: some View {
-            levelCheckView(lvl: 15, imageName: "bolt.fill")
+            impLevelCheckView(lvl: 85, imageName: "bolt.fill")
     }
 }

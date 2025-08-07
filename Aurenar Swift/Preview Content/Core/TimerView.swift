@@ -73,7 +73,7 @@ struct TimerView: View {
         
                 }
                 
-                levelCheckView(lvl: impedanceLVL, imageName: "waveform.path.ecg")
+                impLevelCheckView(lvl: impedanceLVL, imageName: "waveform.path.ecg")
                     .frame(width: 230, height: 70)
                 
             }

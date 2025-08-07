@@ -51,6 +51,8 @@ class bluetoothService: NSObject, ObservableObject {
 
     private var centralManager : CBCentralManager!
     
+    private var rxBuffer = Data()
+    
     var adafruitPeripheral : CBPeripheral?
     
     @Published var peripheralStatus : connectionStatus = .disconnected
@@ -172,7 +174,7 @@ extension bluetoothService: CBPeripheralDelegate {
             print("data sent")
         }
     }
-
+    
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         if characteristic.uuid == rxUUID {
@@ -183,97 +185,132 @@ extension bluetoothService: CBPeripheralDelegate {
                 return
             }
             
-            let decoded = data.decodedFromCOBS()
-            guard !decoded.isEmpty else {
+            rxBuffer.append(data)
+            
+            while let delimiterIndex = rxBuffer.firstIndex(of: 0x00) {
+                let frame = rxBuffer[..<delimiterIndex]
+                rxBuffer.removeSubrange(...delimiterIndex)
+                
+                if !frame.isEmpty{
+                    decoded(frame.decodedFromCOBS())
+                }
+            }
+        }
+    }
+    
+    
+    private func decoded(_ decoded: [Data]) {
+        for data in decoded {
+            processFrame(data)
+        }
+    }
+    
+    private func processFrame(_ data: Data) {
+        let byte = Array(data)
+        
+        guard !byte.isEmpty,
+              let cmd = byte.first else {
+            print("Decode Failure")
+            return
+        }
+        
+        if cmd == BLE_TELEMETRY.telemetry1hz.rawValue {
+            print("Packet: size=\(byte.count), hex=[\(byte.map { String(format: "%02X", $0) }.joined(separator: " "))]")
+            switch byte.count {
+                
+            case 9:
+                //battery bytes
+                let battery0 = UInt32(byte[1])
+                let battery1 = UInt32(byte[2]) << 8
+                let battery2 = UInt32(byte[3]) << 16
+                let battery3 = UInt32(byte[4]) << 24
+                let battery = battery0 | battery1 | battery2 | battery3
+                
+                //impedance bytes
+                let impedance0 = UInt32(byte[5])
+                let impedance1 = UInt32(byte[6]) << 8
+                let impedance2 = UInt32(byte[7]) << 16
+                let impedance3 = UInt32(byte[8]) << 24
+                let impedance = impedance0 | impedance1 | impedance2 | impedance3
+                
+                print("Battery: \(battery) (0x\(String(format:"%08X", battery)))")
+                print("Impedance: \(impedance) (0x\(String(format:"%08X", impedance)))")
+                
+                DispatchQueue.main.async {
+                    self.batteryLvl = CGFloat(Double((battery * 10 ) / 500))
+                    let minImpedance: Double = 5000
+                    let maxImpedance: Double = 57000
+                    let impedanceValue = (Double(impedance))
+                    let percentage = max(0.0, min(1.0, (impedanceValue - minImpedance) / (maxImpedance - minImpedance))) * 100.0
+                    self.impedanceLvl = percentage
+                    
+                    print("bat \(self.batteryLvl)")
+                    print("imp \(self.impedanceLvl)")
+                }
+                
+                return
+                
+            default:
+                print("Invalid telemetry size \(byte.count)")
+                print("[\(byte.map { String(format: "%02X", $0) }.joined(separator: " "))]")
+                print("ignoring false cmd")
                 return
             }
-            
-            guard let byte = decoded.first,
-                    let cmd = byte.first
-            else {
-                print("Decode failure");
-                return;
+        }
+        
+        guard byte.count == 1 else {
+            print("ignoring non-command size=\(byte.count), type=0x\(String(format:"%02X", cmd))")
+            return
+        }
+        
+        
+        
+        switch cmd {
+        case BLE_CMD.ack.rawValue:
+            print("ACK received")
+        case BLE_CMD.start.rawValue:
+            DispatchQueue.main.async {
+                self.devState = .running
             }
-            
-            if cmd == BLE_TELEMETRY.telemetry1hz.rawValue {
-                switch byte.count {
-                case 5:
-                    let battery = UInt16(byte[1]) | (UInt16(byte[2]) << 8)
-                    let impedance = UInt16(byte[3]) | (UInt16(byte[4]) << 8)
-                    
-                    DispatchQueue.main.async {
-                        self.batteryLvl = CGFloat(Double((battery / 4096) * 10))
-                        let minImpedance: Double = 5000
-                        let maxImpedance: Double = 57000
-                        let impedanceValue = (Double(impedance))
-                        let percentage = max(0.0, min(1.0, (impedanceValue - minImpedance) / (maxImpedance - minImpedance))) * 100.0
-                        self.impedanceLvl = percentage
-                        print("bat \(self.batteryLvl)")
-                        print("imp \(self.impedanceLvl)")
-                    }
-                    
-                    return
-                    
-                default:
-                    print("ignoring false cmd")
-                    return
-                }
+            print("received \(cmd)")
+            print("stim started by AUR120")
+        case BLE_CMD.pause.rawValue:
+            DispatchQueue.main.async {
+                self.devState = .paused
             }
-                      
-            guard byte.count == 1 else {
-                    print("ignoring non-command frame len=\(byte.count), type=0x\(String(format:"%02X", cmd))")
-                    return
+            print("stim paused by AUR120")
+        case BLE_CMD.stopped.rawValue:
+            DispatchQueue.main.async {
+                self.devState = .stopped
             }
-                       
-                    
-            
-            switch cmd {
-            case BLE_CMD.ack.rawValue:
-                print("ACK received")
-            case BLE_CMD.start.rawValue:
-                DispatchQueue.main.async {
-                    self.devState = .running
-                }
-                print("received \(cmd)")
-                print("stim started by AUR120")
-            case BLE_CMD.pause.rawValue:
-                DispatchQueue.main.async {
-                    self.devState = .paused
-                }
-                print("stim paused by AUR120")
-            case BLE_CMD.stopped.rawValue:
-                DispatchQueue.main.async {
-                    self.devState = .stopped
-                }
-                print("stim stopped by AUR120")
-            case BLE_CMD.impFail.rawValue:
-                DispatchQueue.main.async {
-                    self.devState = .impFail
-                }
-                print("impedance error by AUR120")
-            case BLE_CMD.therapyCP.rawValue:
-                DispatchQueue.main.async {
-                    self.devState = .therapyCP
-                }
-                print("therapy complete by AUR120")
-            case BLE_CMD.batLow.rawValue:
-                DispatchQueue.main.async {
-                    self.devState = .batLow
-                }
-                print("battery of device low")
-            case BLE_CMD.impCheck.rawValue:
-                DispatchQueue.main.async {
-                    self.devState = .impCheck
-                }
-                print("impedance check failed by AUR120")
-            case BLE_CMD.impSuccess.rawValue:
-                DispatchQueue.main.async {
-                    self.devState = .impSuccess
-                }
-                print("impedance check passed by AUR120")
-            default:
-                print("unknown cmd: \(decoded[0])")
+            print("stim stopped by AUR120")
+        case BLE_CMD.impFail.rawValue:
+            DispatchQueue.main.async {
+                self.devState = .impFail
             }
+            print("impedance error by AUR120")
+        case BLE_CMD.therapyCP.rawValue:
+            DispatchQueue.main.async {
+                self.devState = .therapyCP
+            }
+            print("therapy complete by AUR120")
+        case BLE_CMD.batLow.rawValue:
+            DispatchQueue.main.async {
+                self.devState = .batLow
+            }
+            print("battery of device low")
+        case BLE_CMD.impCheck.rawValue:
+            DispatchQueue.main.async {
+                self.devState = .impCheck
+            }
+            print("impedance check failed by AUR120")
+        case BLE_CMD.impSuccess.rawValue:
+            DispatchQueue.main.async {
+                self.devState = .impSuccess
+            }
+            print("impedance check by AUR120")
+        default:
+            print("unknown cmd")
         }
     }
 }
