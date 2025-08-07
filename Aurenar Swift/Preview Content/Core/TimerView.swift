@@ -61,14 +61,17 @@ struct TimerView: View {
         //impedance lvl meter
         let impedanceLVL = bt.impedanceLvl
         
+        //Signal stength ranging from -85 dbm to -30 dbm
+        let btSignal = bt.signalStrengthPercent
+        
         VStack(spacing: 25) {
             
             VStack(spacing: 0) {
                 HStack (spacing: 30) {
                     
-                    levelCheckView(lvl: batteryLVL, imageName: "bolt.fill")
+                    levelCheckView(lvl: batteryLVL, imageName: "bolt.fill", color: .green)
                         .frame(width: 100, height: 30)
-                    levelCheckView(lvl: batteryLVL, imageName: "link")
+                    levelCheckView(lvl: btSignal, imageName: "link", color: Color(red: 3.0/255.0, green: 160.0/255.0, blue: 211.0/255.0))
                         .frame(width: 100, height: 30)
         
                 }

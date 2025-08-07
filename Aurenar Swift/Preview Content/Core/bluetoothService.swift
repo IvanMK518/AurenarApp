@@ -61,6 +61,9 @@ class bluetoothService: NSObject, ObservableObject {
     @Published var impedanceLvl: CGFloat = 0
     @Published var timeRemaining: Int = 0
     @Published var devState: TimerView.TimerState = .stopped
+    @Published var signalStrength: Int = 0
+    @Published var signalStrengthPercent: CGFloat = 0
+    private var rssiTimer: Timer?
     
     var hasPaired = false
     
@@ -99,6 +102,39 @@ class bluetoothService: NSObject, ObservableObject {
         let encoded = data.encodedUsingCOBS()
         send(encoded)
     }
+    
+    func readSignalStrength() {
+        guard let peripheral = adafruitPeripheral,
+              peripheralStatus == .connected else {
+            print("No RSSI: missing peripheral")
+            return
+        }
+        
+        peripheral.readRSSI()
+    }
+    
+    private func signalStrengthConversion() {
+        let rssi = Double(signalStrength)
+        
+        let minRSSI: Double = -85
+        let maxRSSI: Double = -50
+        
+        let range = max(minRSSI, min(maxRSSI, rssi))
+        
+        let percentage = ((range - minRSSI) / (maxRSSI - minRSSI)) * 100
+        
+        DispatchQueue.main.async {
+            self.signalStrengthPercent = CGFloat(percentage)
+            print("signal strength Percent: \(self.signalStrengthPercent)")
+        }
+    }
+    
+    private func startRSSIMonitoring() {
+        rssiTimer?.invalidate()
+        rssiTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+            self.readSignalStrength()
+        }
+    }
 
 }
     
@@ -125,6 +161,8 @@ extension bluetoothService : CBCentralManagerDelegate{
         peripheral.delegate = self
         peripheral.discoverServices([bluefruitService])
         centralManager.stopScan()
+        
+        startRSSIMonitoring()
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
@@ -132,6 +170,8 @@ extension bluetoothService : CBCentralManagerDelegate{
         print("Device disconnected")
         adafruitPeripheral = nil
         txCharacteristic = nil
+        rssiTimer?.invalidate()
+        rssiTimer = nil
         
         if hasPaired {
             scan()
@@ -164,6 +204,21 @@ extension bluetoothService: CBPeripheralDelegate {
                 break
             }
             
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: (any Error)?) {
+        if let err = error {
+            print("failed to read RSSI: \(err)")
+            return
+        }
+        
+        let RSSIValue = RSSI.intValue
+        print("signal strenght: \(RSSIValue) dBm")
+        
+        DispatchQueue.main.async {
+            self.signalStrength = RSSIValue
+            self.signalStrengthConversion()
         }
     }
     

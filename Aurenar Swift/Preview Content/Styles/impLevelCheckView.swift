@@ -17,23 +17,10 @@ struct impLevelCheckView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                Path { path in
-                    let midY = geo.size.height / 2
-                    let start = CGPoint(x: 0, y: midY)
-                    let end = CGPoint(x: geo.size.width, y: midY)
-                    path.move(to: start)
-                    path.addLine(to: end)
-                }
+                lvlLine()
                 .stroke(Color.primary.opacity(0.15), style: StrokeStyle(lineWidth: 18, lineCap: .round))
                 
-                Path { path in
-                    let midY = geo.size.height / 2
-                    let width = geo.size.width * min(max(lvl / 100.0, 0), 1)
-                    let start = CGPoint(x: 0, y: midY)
-                    let end = CGPoint(x: width, y: midY)
-                    path.move(to: start)
-                    path.addLine(to: end)
-                }
+                lvlLine()
                 .stroke(Color(lvl <= 5 || lvl >= 95 ? .red : lvl <= 15 || lvl >= 85 ? .yellow: color).opacity(lvl == 0 ? 0.0 : 0.7), style: StrokeStyle(lineWidth: 14, lineCap: .round))
                 .animation(.easeInOut(duration: 1.0), value: lvl)
                 
