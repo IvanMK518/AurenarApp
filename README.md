@@ -19,10 +19,10 @@ This is the Aurenar Wireless V-Link's companion app. This app acts as both a con
  - `send()` - Low-level data transmission to BLE device ([bluetoothService.swift#L86](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L86))
 
 - **Command Interface**
- - `sendCmd()` - COBS-encoded command transmission ([bluetoothService.swift#L96](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L96))
- - `startStim()` - Send stimulation start command ([bluetoothService.swift#L339](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L339))
- - `pauseStim()` - Send stimulation pause command ([bluetoothService.swift#L344](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L344))
- - `resumeStim()` - Send stimulation resume command ([bluetoothService.swift#L349](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L349))
+  - `sendCmd()` - COBS-encoded command transmission ([bluetoothService.swift#L96](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L96))
+  - `startStim()` - Send stimulation start command ([bluetoothService.swift#L339](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L339))
+  - `pauseStim()` - Send stimulation pause command ([bluetoothService.swift#L344](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L344))
+  - `resumeStim()` - Send stimulation resume command ([bluetoothService.swift#L349](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L349))
 
 - **Signal Monitoring**
  - `readSignalStrength()` - Request RSSI from connected device ([bluetoothService.swift#L102](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L102))
