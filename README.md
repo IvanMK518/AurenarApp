@@ -9,6 +9,8 @@ This is the Aurenar Wireless V-Link's companion app. This app acts as both a con
 
 ## Features
 
+## Documentation For Future Developers
+
 ## Special Thanks
 
 
