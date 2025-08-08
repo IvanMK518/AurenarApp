@@ -106,6 +106,44 @@ This is the Aurenar Wireless V-Link's companion app. This app acts as both a con
   - Observable object for SwiftUI view updates
   - Automatic persistence on data changes via `didSet` observer
 
+### **TimerView**: Handles stimulation timer updates, device state management, and user controls for therapy sessions.
+- **Timer Management**
+  - `startTimer()` - Initializes 1-second interval countdown timer for 20-minute sessions ([TimerView.swift#L173](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TimerView.swift#L173))
+  - `stopTimer()` - Invalidates and cleans up active timer ([TimerView.swift#L186](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TimerView.swift#L186))
+  - `formattedTime` - Converts remaining seconds to MM:SS display format ([TimerView.swift#L40](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TimerView.swift#L40))
+  - Auto-stops therapy when countdown reaches zero
+
+- **Device State Handling**
+  - **TimerState enum**: `.paused`, `.running`, `.stopped`, `.impFail`, `.impCheck`, `.batLow`, `.therapyCP`, `.impSuccess` ([TimerView.swift#L16](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TimerView.swift#L16))
+  - State-reactive timer control: starts on `.running`/`.impSuccess`, stops on `.paused`/`.stopped`
+  - Integration with `bluetoothService` for real-time device state updates
+  - Automatic therapy completion counting on `.therapyCP` state
+
+- **User Interface Controls**
+  - Dynamic play/pause button based on current device state ([TimerView.swift#L98](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TimerView.swift#L98))
+  - Visual progress indicators: battery level, signal strength, impedance monitoring
+  - State-dependent animations: `WaveAnimation` during therapy, `impCheckAnimation` during setup
+  - Circular progress ring showing therapy completion percentage
+
+- **Error & Status Overlays**
+  - `overlay()` - Displays full-screen status messages with auto-dismiss timers ([TimerView.swift#L154](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TimerView.swift#L154))
+  - **Error States**: Poor ear contact (10s), battery low (5s), impedance check failure (5s)
+  - **Success State**: Therapy complete confirmation (5s)
+  - Customizable icon, color, message, and duration per state
+
+- **Live Activity Integration**
+  - ActivityKit integration for iOS Dynamic Island/Lock Screen widgets
+  - `TimeTrackingAttributes` for persistent therapy session tracking
+  - Started when therapy begins, tracks session duration in background
+
+- **Real-time Monitoring**
+  - **Battery Level**: `bt.batteryLvl` with green bolt icon indicator
+  - **Signal Strength**: `bt.signalStrengthPercent` (-85dBm to -50dBm range) with link icon
+  - **Impedance Level**: `bt.impedanceLvl` with ECG waveform visualization
+  - Color-coded status indicators for each metric
+
+- **Therapy Session Flow**
+
 
 ## Special Thanks
 
