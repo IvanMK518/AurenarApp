@@ -1,4 +1,4 @@
-# Aurenar V-Link Companion App
+# README
 
 <p align="center">
  <img width="244" height="344" alt="Aurenar Logo Bright" src="https://github.com/user-attachments/assets/dcc4dfba-73f2-4649-ad2f-7cc867eb3b09" />
