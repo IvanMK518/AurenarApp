@@ -9,8 +9,8 @@ This is the Aurenar Wireless V-Link's companion app. This app acts as both a con
 
 ## Features
 
-## Documentation For Future Developers
-### Core Functions: 
+# Documentation For Future Developers
+## Core Functions: 
 ### **AccountView**: This is currently a static placeholder for future user's control panel. When please update when authentication is implemented.
 ### **bluetoothService**: This function handles all bluetooth capabilities in the app.
 - **Core BLE Management**
