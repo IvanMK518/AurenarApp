@@ -81,6 +81,33 @@ This is the Aurenar Wireless V-Link's companion app. This app acts as both a con
   - Handles month boundaries and leap years automatically
   - Filters display range from Sunday before month start to month end
 
+### **HomeView**: This function handles transition between paired state and unpaired state.
+  - if `bt.connected` is called as positive from `bluetoothService` then this view displays `TimerView`, else it remains on the pairing screen `PairingView`.
+
+### **TherapyCounter**: This function counts finished therapy sessions logged by acknowledgement sent from the microcontroller.
+- **Session Tracking**
+  - `countCompletion()` - Increments daily therapy session count (max 2 per day) ([TherapyCounter.swift#L22](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TherapyCounter.swift#L22))
+  - `getCompletion(for: Date)` - Retrieves completion count for specific date ([TherapyCounter.swift#L33](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TherapyCounter.swift#L33))
+  - Date-based session limiting: maximum 2 therapy sessions per calendar day
+  - Triggered by microcontroller ACK signals via BLE communication
+
+- **Data Persistence**
+  - `saveCompletions()` - Auto-saves session data to UserDefaults on count changes ([TherapyCounter.swift#L17](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TherapyCounter.swift#L17))
+  - `loadCompletion()` - Restores session history from UserDefaults on app launch ([TherapyCounter.swift#L38](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TherapyCounter.swift#L38))
+  - Storage key: "therapyComplete" in UserDefaults
+  - Dictionary format: `[String: Int]` where key is "yyyy-MM-dd" date string
+
+- **Date Management**
+  - `dateKey(for: Date)` - Converts Date objects to standardized string keys ([TherapyCounter.swift#L29](https://github.com/IvanMK518/Firmware-AUR120/blob/main/TherapyCounter.swift#L29))
+  - Format: "yyyy-MM-dd" (ISO 8601 date format)
+  - Ensures consistent date-based tracking across app sessions
+
+- **State Management**
+  - `@Published var count` - Dictionary of completion counts per date
+  - Observable object for SwiftUI view updates
+  - Automatic persistence on data changes via `didSet` observer
+  - Integration with CalendarView for visual therapy progress tracking
+
 
 ## Special Thanks
 
