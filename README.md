@@ -11,8 +11,8 @@ This is the Aurenar Wireless V-Link's companion app. This app acts as both a con
 
 ## Documentation For Future Developers
 ### Core Functions: 
-- **AccountView**: This is currently a static placeholder for future user's control panel. When please update when authentication is implemented.
-- **bluetoothService**: This function handles all bluetooth capabilities in the app.
+### **AccountView**: This is currently a static placeholder for future user's control panel. When please update when authentication is implemented.
+### **bluetoothService**: This function handles all bluetooth capabilities in the app.
 - **Core BLE Management**
  - `bluetoothService.init()` - Initializes CBCentralManager and sets up BLE delegates ([bluetoothService.swift#L67](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L67))
  - `scan()` - Scans for AdaFruit Bluefruit LE devices with V-Link service UUID ([bluetoothService.swift#L74](https://github.com/IvanMK518/Firmware-AUR120/blob/main/bluetoothService.swift#L74))
