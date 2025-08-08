@@ -10,6 +10,15 @@ This is the Aurenar Wireless V-Link's companion app. This app acts as both a con
 ## Features
 
 # Documentation For Future Developers
+## Please read this document for environment setup in VSCode:
+[Dev Env Setup and config Rev02.docx](https://github.com/user-attachments/files/21690740/Dev.Env.Setup.and.config.Rev02.docx)
+
+- **Please also do the following:**
+ - in the very same `CMakeLists.txt` under `set(MX_Application_Src)` add `${CMAKE_SOURCE_DIR}/Core/Src/ble.c` and `${CMAKE_SOURCE_DIR}/Core/Src/cobs.c`.
+ - Then run a Clean Rebuild or Build + Flash
+   
+
+
 ## Core Functions: 
 ### **AccountView**: This is currently a static placeholder for future user's control panel. When please update when authentication is implemented.
 ### **bluetoothService**: This function handles all bluetooth capabilities in the app.
