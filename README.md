@@ -55,6 +55,31 @@ This is the Aurenar Wireless V-Link's companion app. This app acts as both a con
   - **RX UUID**: `6E400003-B5A3-F393-E0A9-E50E24DCCA9E` (Device -> Phone)
   - GlassGem Cobs Library: ([COBS](https://github.com/armadsen/GlassGem))
 
+### **CalendarView**: This function displays a calendar with therapy tracking properties.
+- **Therapy Completion Tracking**
+  - Visual checkmark indicators for daily therapy sessions (1-2 sessions per day)
+  - Color-coded completion status: Gray (none), Yellow (1 session), Blue (2+ sessions)
+  - Integration with `TherapyCounter` environment object for session data
+  - `therapyCounter.getCompletion(for: day)` - Retrieves completion count for specific date
+
+- **Date Extensions & Utilities**
+  - `Date.firstLetterOfWeekdays` - Generates weekday headers (S, M, T, W, T, F, S) ([CalendarView.swift#L71](https://github.com/IvanMK518/Firmware-AUR120/blob/main/CalendarView.swift#L71))
+  - `Date.monthNames` - Localized month name array ([CalendarView.swift#L82](https://github.com/IvanMK518/Firmware-AUR120/blob/main/CalendarView.swift#L82))
+  - `Date.startOfMonth` - First day of current month ([CalendarView.swift#L93](https://github.com/IvanMK518/Firmware-AUR120/blob/main/CalendarView.swift#L93))
+  - `Date.endOfMonth` - Last day of current month ([CalendarView.swift#L97](https://github.com/IvanMK518/Firmware-AUR120/blob/main/CalendarView.swift#L97))
+  - `Date.calendarDisplayDays` - Generates array of dates for calendar grid display ([CalendarView.swift#L117](https://github.com/IvanMK518/Firmware-AUR120/blob/main/CalendarView.swift#L117))
+
+- **State Management**
+  - `@State private var date` - Currently selected date for calendar navigation
+  - `@State private var days` - Array of dates to display in calendar grid
+  - `@EnvironmentObject var therapyCounter` - Shared therapy session tracking data
+  - Reactive updates when date selection changes (`onChange(of: date)`)
+
+- **Calendar Logic**
+  - Displays previous/next month days to fill grid
+  - Week starts on Sunday (standard US calendar format)
+  - Handles month boundaries and leap years automatically
+  - Filters display range from Sunday before month start to month end
 
 
 ## Special Thanks
