@@ -5,7 +5,11 @@
 </p>
 
 ## Overview
-This repository contains the firmware responsible for the first reusable and wireless Aurenar V-Link prototype. This README is meant to point future developers in the correct direction pertaining to how BLE was implemented on this device via a wireless UART module (Adafruit Bluefruit Friend LE).
+This is the Aurenar Wireless V-Link's companion app. This app acts as both a controller and receiver of the microcontroller's behaviors.
+
+## Features
+
+## Special Thanks
 
 
 | **Author:**    | Ivan Martinez-Kay                                              |
